@@ -1,0 +1,32 @@
+package exercise.week08.ex02;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+
+public class NumberFilter {
+
+    //t receives a list of numbers and returns a list with only its even numbers.
+
+    public List<Integer> getEven(List<Integer> numbers) {
+        return filter(numbers, number -> number % 2 == 0);
+    }
+
+    // receives a list of numbers and returns a list with only its odd numbers.
+
+    public List<Integer> getOdd(List<Integer> numbers) {
+        return filter(numbers, number -> number % 2 == 1);
+    }
+
+    public List<Integer> filter(List<Integer> numbers, Predicate<Integer> condition) {
+        List<Integer> result = new ArrayList<>();
+        for (Integer number : numbers) {
+            if (condition.test(number)) {
+                result.add(number);
+            }
+        }
+        return result;
+    }
+
+
+}
