@@ -31,7 +31,7 @@ public class StreamsApplication {
                 .collect(Collectors.toList());
         System.out.println(biggerThan);
 
-        
+
         List<Integer> smallerthan = numbers.stream()
                 .filter(e -> e < 5)
                 .map(e -> e * 3)
