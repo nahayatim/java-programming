@@ -36,11 +36,4 @@ public class Student {
         return writingScore;
     }
 
-    @Override
-    public String toString() {
-        return
-                parentalLevelOfEducation
-
-                ;
-    }
 }
