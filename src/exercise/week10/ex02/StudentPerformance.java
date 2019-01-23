@@ -1,45 +1,42 @@
 package exercise.week10.ex02;
 
-
-
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 public class StudentPerformance {
 
-        private List<Student> students= new StudentReader().getStudents();
+    private List<Student> students = new StudentReader().getStudents();
 
-       public Map<String,Long> getParentEducationLevelAppearances(){
-           return students.stream()
-                   .map(e->e.getParentalLevelOfEducation())
-                   .collect(Collectors.groupingBy(e -> e, Collectors.counting()));
-       }
-
-
-       public List<String> sortedParentEducationLevel(){
-                 return  getParentEducationLevelAppearances()
-                           .entrySet()
-                           .stream()
-                           .sorted((e1, e2) ->e2.getValue().compareTo(e1.getValue()) )
-                           .map(entry -> entry.getKey() + " | "+ entry.getValue())
-                           .collect(Collectors.toList());
-       }
+    public Map<String, Long> getParentEducationLevelAppearances() {
+        return students.stream()
+                .map(e -> e.getParentalLevelOfEducation())
+                .collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+    }
 
 
-       public Long numberOfStudentWithHighParentEducationAndLowerScore(){
-           return students.stream()
-                   .filter(e->e.getParentalLevelOfEducation().equals("master's degree"))
-                   .filter(e->e.getMathScore()<60)
-                   .filter(e->e.getReadingScore()<60)
-                   .filter(e->e.getWritingScore()<60)
-                   .count();
-       }
+    public List<String> sortedParentEducationLevel() {
+        return getParentEducationLevelAppearances()
+                .entrySet()
+                .stream()
+                .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                .map(entry -> entry.getKey() + " | " + entry.getValue())
+                .collect(Collectors.toList());
+    }
 
 
-    public  List<String>  topFourGenderAndAverageScore() {
+    public Long numberOfStudentWithHighParentEducationAndLowerScore() {
+        return students.stream()
+                .filter(e -> e.getParentalLevelOfEducation().equals("master's degree"))
+                .filter(e -> e.getMathScore() < 60)
+                .filter(e -> e.getReadingScore() < 60)
+                .filter(e -> e.getWritingScore() < 60)
+                .count();
+    }
+
+
+    public List<String> topFourGenderAndAverageScore() {
         return students.stream()
                 .map(e -> new AverageData(e.getGender(), avgNumber(e)))
                 .sorted((e1, e2) -> e2.getAvg().compareTo(e1.getAvg()))
@@ -48,17 +45,18 @@ public class StudentPerformance {
                 .collect(Collectors.toList());
     }
 
-    private  Integer avgNumber(Student e) {
+    private Integer avgNumber(Student e) {
         return (e.getReadingScore() + e.getMathScore() + e.getWritingScore()) / 3;
     }
 
 
+    public Boolean isAnyStudentWithParentEducationSomehighschool() {
+        return students.stream()
+                .filter(e -> e.getWritingScore() >= 97)
+                .filter(e -> e.getReadingScore() >= 97)
+                .filter(e -> e.getMathScore() >= 97)
+                .anyMatch(e -> e.getParentalLevelOfEducation().equals("some high school"));
 
-
-
-
-
-
-
+    }
 }
 

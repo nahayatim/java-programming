@@ -15,6 +15,6 @@ public class AverageData {
 
     @Override
     public String toString() {
-        return gender+ "\t| " + avg;
+        return gender + "\t| " + avg;
     }
 }

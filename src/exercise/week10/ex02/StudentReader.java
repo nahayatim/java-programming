@@ -2,7 +2,6 @@ package exercise.week10.ex02;
 
 import exercise.week09.ex02.FileReader;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 
