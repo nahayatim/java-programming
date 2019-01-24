@@ -18,7 +18,8 @@ class SmsSummarizerTest {
     void hamAndSpamRatio() {
         String actual = smsList.stream()
                 .collect(Collectors.groupingBy(Sms::getLabel, Collectors.counting()))
-                .entrySet().stream()
+                .entrySet()
+                .stream()
                 .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
                 .map(e -> e.getKey() + " " + (e.getValue() * 100) / smsList.size() + "%")
                 .collect(Collectors.joining(" "));
@@ -67,11 +68,11 @@ class SmsSummarizerTest {
                 .collect(Collectors.joining(" "));
 
 
-        String ecpected = "Most used ham letter: e appears 26364 times";
-        Assertions.assertEquals(ecpected, mostUsedLetter);
+        String expected = "Most used ham letter: e appears 26364 times";
+        Assertions.assertEquals(expected, mostUsedLetter);
     }
 
-    
+
     @Test
     void longestSpamMessage() {
         Optional<Integer> longestSpamMessage = smsList.stream()
