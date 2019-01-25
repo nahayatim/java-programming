@@ -24,6 +24,8 @@ public class AliceReader {
                     .map(e->e.replaceAll(" \\)"," "))
                     .map(e->e.replaceAll(" \\["," "))
                     .map(e->e.replaceAll(" \\]"," "))
+                    //.map(e->e.replaceAll("“"," "))
+                    //.map(e->e.replaceAll("”"," "))
                     .collect(Collectors.toList());
 
         }

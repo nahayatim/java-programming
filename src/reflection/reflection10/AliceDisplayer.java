@@ -1,7 +1,6 @@
 package reflection.reflection10;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -14,6 +13,7 @@ public class AliceDisplayer {
         long allWords = lines.stream()
                 .map(e -> e.split(" "))
                 .flatMap(Stream::of)
+                .filter(e->!e.isEmpty())
                 .count();
         System.out.println("Number of words: "+allWords);
 
@@ -24,38 +24,73 @@ public class AliceDisplayer {
         long distinctWord = lines.stream()
                 .map(e->e.split(" "))
                 .flatMap(Stream::of)
+                .filter(e->!e.isEmpty())
                 .distinct()
                 .count();
         System.out.println("Number of distinct words: "+distinctWord);
     }
 
-    
+
+
     public void findLongestWord(){
-        Optional<Integer> longestWord = lines.stream()
+        List<List<String>> longestWord = lines.stream()
                 .map(e -> e.split(" "))
                 .flatMap(Stream::of)
-                .map(String::length)
-                .sorted((e1, e2) -> e2.compareTo(e1))
-                .findFirst();
-        System.out.println("Longest words: "+longestWord.get());
+                .filter(e -> !e.isEmpty())
+                .collect(Collectors.groupingBy(e -> e.length(), Collectors.toList()))
+                .entrySet().stream()
+                .sorted((e1, e2) -> e2.getKey().compareTo(e1.getKey()))
+                .map(e -> e.getValue())
+                .limit(1)
+                .collect(Collectors.toList());
+        System.out.println("Longest words:"+longestWord);
+
     }
-    //Most appearing 5 words:
-    //1816 | the
-    //940 | and
-    //805 | to
-    //690 | a
-    //628 | of
+
 
     public void findMostFiveAppearingWords(){
-        lines.stream()
-                .map(e->e.split(" "))
-                .collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+        List<String> fiveMostWords = lines.stream()
+                .map(e -> e.split(" "))
+                .flatMap(Stream::of)
+                .filter(e -> !e.isEmpty())
+                .collect(Collectors.groupingBy(e -> e, Collectors.counting()))
+                .entrySet().stream()
                 .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
                 .map(entry -> entry.getKey() + " | " + entry.getValue())
+                .limit(5)
                 .collect(Collectors.toList());
+        System.out.println("Most appearing 5 words: "+fiveMostWords);
     }
 
+    public void findMostFiveAppearingLetters(){
+        List<String> fiveMostWords = lines.stream()
+                .map(e -> e.split(""))
+                .flatMap(Stream::of)
+                .filter(e -> !e.isEmpty())
+                .collect(Collectors.groupingBy(e -> e, Collectors.counting()))
+                .entrySet().stream()
+                .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                .map(entry -> entry.getKey() + " | " + entry.getValue())
+                .limit(5)
+                .collect(Collectors.toList());
+        System.out.println("Most appearing 5 letters: "+fiveMostWords);
+    }
+
+
+
+    public void countHowManyTimesAliceAppears() {
+        long count = lines.stream()
+                .map(e -> e.split(" "))
+                .flatMap(Stream::of)
+                .filter(e->!e.isEmpty())
+                .map(e -> "Alice".equalsIgnoreCase(e))
+                .count();
+        System.out.println("Alice appearances: "+count);
 }
+
+}
+
+
 
 
 

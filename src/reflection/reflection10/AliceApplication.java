@@ -1,6 +1,5 @@
 package reflection.reflection10;
 
-import java.util.List;
 
 public class AliceApplication {
 
@@ -11,11 +10,9 @@ public class AliceApplication {
             displayer.countAllWords();
             displayer.countDistinctWords();
             displayer.findLongestWord();
-
-
-
-
-
+            displayer.findMostFiveAppearingWords();
+            displayer.findMostFiveAppearingLetters();
+            displayer.countHowManyTimesAliceAppears();
         }
 }
 
