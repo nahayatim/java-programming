@@ -1,15 +1,15 @@
 package exercise.week11.ex02;
 
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class MilitaryTime {
 
-    public String toMilitaryTime(String timeFormat12Hour) {
+    private DateTimeFormatter format12 = DateTimeFormatter.ofPattern("hh:mm:ss a");
+    private DateTimeFormatter format24 = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-        LocalTime currentTime = LocalTime.parse(timeFormat12Hour, DateTimeFormatter.ofPattern("hh:mm:ss a"));
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        return currentTime.format(dateTimeFormatter);
+    public String toMilitaryTime(String time) {
+
+        return format24.format(format12.parse(time));
     }
 
 }
