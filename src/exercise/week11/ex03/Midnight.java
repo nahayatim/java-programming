@@ -1,4 +1,10 @@
 package exercise.week11.ex03;
 
-public class Midnight {
+import java.time.LocalTime;
+
+public class Midnight extends Moment {
+
+    public Midnight() {
+        super(LocalTime.of(24, 00), LocalTime.of(24, 00), "midnight");
+    }
 }
