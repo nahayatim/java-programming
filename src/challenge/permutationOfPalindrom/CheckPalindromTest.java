@@ -1,4 +1,4 @@
-package challenge;
+package challenge.permutationOfPalindrom;
 
 import org.junit.jupiter.api.Test;
 
