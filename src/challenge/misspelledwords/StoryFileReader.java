@@ -1,4 +1,4 @@
-package challenge.ex9;
+package challenge.misspelledwords;
 
 import exercise.week10.ex04.FileReader;
 
@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 public class StoryFileReader {
     public Set<String> getLine() {
-        return new FileReader().asStream("challenge/ex9/book/alice's-adventures-in-wonderland.txt")
+        return new FileReader().asStream("challenge/misspelledwords/book/alice's-adventures-in-wonderland.txt")
                 .map(String::toLowerCase)
                 .map(e -> e.replaceAll(",", " "))
 //                .map(e -> e.replaceAll("’s", " "))
