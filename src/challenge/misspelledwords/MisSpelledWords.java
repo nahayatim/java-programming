@@ -1,4 +1,4 @@
-package challenge.ex9;
+package challenge.misspelledwords;
 
 import java.util.List;
 import java.util.Set;
