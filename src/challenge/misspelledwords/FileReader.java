@@ -1,4 +1,4 @@
-package challenge.ex9;
+package challenge.misspelledwords;
 
 import java.io.IOException;
 import java.net.URI;
