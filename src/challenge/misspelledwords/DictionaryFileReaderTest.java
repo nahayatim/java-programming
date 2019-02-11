@@ -1,4 +1,4 @@
-package challenge.ex9;
+package challenge.misspelledwords;
 
 import org.junit.jupiter.api.Test;
 
